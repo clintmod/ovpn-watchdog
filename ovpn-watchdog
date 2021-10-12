@@ -1,0 +1,18 @@
+#!/bin/sh /etc/rc.common
+# copy this file to /etc/init.d/ovpn-watchdog
+# and chmod +x /etc/init.d/ovpn-watchdog
+# then run: 
+# /etc/init.d/ovpn-watchdog enable
+# /etc/init.d/ovpn-watchdog start
+
+START=100
+
+WATCHDOG_PID=NOT_SET
+
+stop() {
+    kill -9 $WATCHDOG_PID
+}
+start() {
+    /etc/config/ovpn-watchdog.sh &
+    WATCHDOG_PID=$!
+}
